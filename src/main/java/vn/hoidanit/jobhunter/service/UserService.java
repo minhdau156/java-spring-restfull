@@ -35,4 +35,12 @@ public class UserService {
     public List<User> fetchAllUser () {
         return this.userRepository.findAll();
     }
+
+    public User updateUser(User user) {
+        Optional<User> userOptional = this.userRepository.findById(user.getId());
+        if (!userOptional.isPresent()) {
+            return null ;
+        }
+        return this.userRepository.save(user);
+    }
 }
