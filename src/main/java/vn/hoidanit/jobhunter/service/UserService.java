@@ -37,10 +37,13 @@ public class UserService {
     }
 
     public User updateUser(User user) {
-        Optional<User> userOptional = this.userRepository.findById(user.getId());
-        if (!userOptional.isPresent()) {
-            return null ;
+        User currentUser = this.fetchUserById(user.getId());
+        if (currentUser != null) {
+            currentUser.setEmail(user.getEmail());
+            currentUser.setPassword(user.getPassword());
+            currentUser.setName(user.getName());
+            return this.userRepository.save(currentUser);
         }
-        return this.userRepository.save(user);
+        return currentUser;
     }
 }
