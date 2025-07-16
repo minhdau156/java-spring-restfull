@@ -2,6 +2,7 @@ package vn.hoidanit.jobhunter.domain;
 
 import java.time.Instant;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -40,7 +41,7 @@ public class User {
     
     private String address;
     
-    
+    @Column(columnDefinition = "MEDIUMTEXT")    
     private String refreshToken;
     private Instant createdAt;
     private Instant updatedAt;

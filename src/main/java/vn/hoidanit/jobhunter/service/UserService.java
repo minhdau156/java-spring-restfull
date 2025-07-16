@@ -116,4 +116,15 @@ public class UserService {
         res.setUpdatedAt(user.getUpdatedAt());
         return res;
     }
+    public void updateUserToken(String token, String email) {
+        User currUser = this.handleGetUserByUsername(email);
+        if (currUser != null) {
+            currUser.setRefreshToken(token);
+            this.userRepository.save(currUser);
+        }
+    }
+
+    public User getUserByRefreshTokenAndEmail(String email, String token) {
+        return this.userRepository.findByRefreshTokenAndEmail(token, email);
+    }
 }
